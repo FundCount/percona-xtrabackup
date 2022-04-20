@@ -25,6 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 #include <my_thread.h>
 #include <mysql/service_mysql_alloc.h>
 #include <mysql_version.h>
+#include <sys/types.h>
+#define HAVE_STRUCT_TIMESPEC
 #include <pthread.h>
 #include <typelib.h>
 #include <unordered_map>

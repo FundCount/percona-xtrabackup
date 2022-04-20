@@ -14,12 +14,14 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 INCLUDE(gcrypt)
+INCLUDE(pthreads2)
 
 OPTION(WITH_VERSION_CHECK "Build with version check" ON)
 
 INCLUDE(${MYSQL_CMAKE_SCRIPT_DIR}/compile_flags.cmake)
 
 FIND_GCRYPT()
+FIND_PTHREADS2()
 
 CHECK_TYPE_SIZE("unsigned long" SIZEOF_UNSIGNED_LONG)
 
@@ -43,6 +45,7 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_SOURCE_DIR}/storage/innobase/xtrabackup/src/quicklz
   ${CMAKE_SOURCE_DIR}/storage/innobase/xtrabackup/src/crc
   ${GCRYPT_INCLUDE_DIR}
+  ${PTHREADS2_INCLUDE_DIR}
   ${CURL_INCLUDE_DIRS}
   ${CMAKE_CURRENT_BINARY_DIR}
   )
@@ -51,7 +54,7 @@ ADD_DEFINITIONS(${SSL_DEFINES})
 
 ADD_SUBDIRECTORY(crc)
 ADD_SUBDIRECTORY(jsmn)
-ADD_SUBDIRECTORY(xbcloud)
+#ADD_SUBDIRECTORY(xbcloud)
 
 ########################################################################
 # xtrabackup binary
@@ -125,6 +128,7 @@ TARGET_LINK_LIBRARIES(xtrabackup
   minchassis
   keyring_common
   ${GCRYPT_LIBS}
+  ${PTHREADS2_LIBS}
   ${ICU_LIBRARIES}
   crc
   )
@@ -189,6 +193,7 @@ SET_TARGET_PROPERTIES(xbstream
 
 TARGET_LINK_LIBRARIES(xbstream
   ${GCRYPT_LIBS}
+  ${PTHREADS2_LIBS}
   mysys
   crc
   ${LZ4_LIBRARY}
@@ -203,6 +208,7 @@ MYSQL_ADD_EXECUTABLE(xbcrypt
   xbcrypt_read.cc
   xbcrypt_write.cc
   datasink.cc
+  ds_buffer.cc
   ds_encrypt.cc
   ds_decrypt.cc
   ds_local.cc

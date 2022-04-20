@@ -68,7 +68,7 @@ static inline int msg_ts(const char *fmt, ...) {
   strftime(date, sizeof(date), "%y%m%d %H:%M:%S", localtime(&t));
 
   va_start(args, fmt);
-  result = vasprintf(&line, fmt, args);
+  result = vsprintf(line, fmt, args);
   va_end(args);
 
   if (result != -1) {

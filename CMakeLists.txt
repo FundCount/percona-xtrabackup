@@ -1473,6 +1473,7 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_SOURCE_DIR}
   ${CMAKE_SOURCE_DIR}/include
   )
+#INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include/pthreads.2)
 
 IF(WITH_LTO)
   IF(APPLE)
@@ -1854,7 +1855,7 @@ IF(WITH_PROTOBUF STREQUAL "bundled" OR WITH_FIDO STREQUAL "bundled")
   ENDIF()
 ENDIF()
 
-ADD_SUBDIRECTORY(extra/libkmip)
+#ADD_SUBDIRECTORY(extra/libkmip)
 
 #
 # Setup maintainer mode options by the end. Platform checks are
